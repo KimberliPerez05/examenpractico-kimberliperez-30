@@ -1,905 +1,731 @@
 /* =====================================================
-   NEON KICKS
-   SISTEMA CRUD DE ZAPATOS
-   PRECIOS EN QUETZALES
+   NEONKICKS GT
+   SISTEMA CRUD + CARRITO + FACTURA
 ===================================================== */
 
 
 /* =====================================================
-   IMÁGENES REALES DE ZAPATOS
+   CONFIGURACIÓN
+===================================================== */
+
+const CLAVE_PRODUCTOS = "NEONKICKS_PRODUCTOS";
+
+const CLAVE_CARRITO = "NEONKICKS_CARRITO";
+
+
+/* =====================================================
+   IMÁGENES REALES
 ===================================================== */
 
 const imagenes = [
 
-    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=90",
 
-    "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=900&q=90",
 
-    "https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=900&q=90",
 
-    "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?auto=format&fit=crop&w=900&q=90",
 
-    "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=900&q=90",
 
-    "https://images.unsplash.com/photo-1605348532760-6753d2c43329?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1554134417-4d16c9df4e80?auto=format&fit=crop&w=900&q=90",
 
-    "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?auto=format&fit=crop&w=900&q=90",
 
-    "https://images.unsplash.com/photo-1597045566677-8cf032ed6634?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=900&q=90",
 
-    "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=900&q=90",
 
-    "https://images.unsplash.com/photo-1607522370275-f14206abe5d3?auto=format&fit=crop&w=800&q=80"
+    "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=900&q=90"
 
 ];
 
 
+
 /* =====================================================
-   PRODUCTOS
+   PRODUCTOS INICIALES
+   45 PRODUCTOS
 ===================================================== */
 
-let productos = [
+const nombres = [
 
-    {
-        id: 1,
-        nombre: "Air Max 90",
-        marca: "Nike",
-        talla: "40",
-        color: "Rojo / Blanco",
-        precio: 899,
-        cantidad: 12,
-        imagen: imagenes[0]
-    },
+    "Neon Runner X",
+    "Cyber Street 01",
+    "Volt Air Pro",
+    "Urban Pulse",
+    "Neon Force",
+    "Lunar Dash",
+    "Electric Wave",
+    "Shadow Flux",
+    "Galaxy Sprint",
 
-    {
-        id: 2,
-        nombre: "Air Force 1",
-        marca: "Nike",
-        talla: "39",
-        color: "Blanco",
-        precio: 999,
-        cantidad: 8,
-        imagen: imagenes[1]
-    },
+    "Neon Court",
+    "Hyper Drive",
+    "Aero Light",
+    "Pixel Runner",
+    "Midnight Boost",
+    "Volt Classic",
+    "Future Step",
+    "Street Nova",
+    "Laser Motion",
 
-    {
-        id: 3,
-        nombre: "Superstar Classic",
-        marca: "Adidas",
-        talla: "41",
-        color: "Blanco / Negro",
-        precio: 799,
-        cantidad: 15,
-        imagen: imagenes[2]
-    },
+    "Neon Edge",
+    "Quantum Run",
+    "Urban Flash",
+    "Chrome Runner",
+    "Pulse Max",
+    "Cyber Jump",
+    "Neon Storm",
+    "Velocity GT",
+    "Night Rider",
+    "Solar Flex",
 
-    {
-        id: 4,
-        nombre: "Ultraboost",
-        marca: "Adidas",
-        talla: "42",
-        color: "Negro",
-        precio: 1299,
-        cantidad: 7,
-        imagen: imagenes[3]
-    },
+    "Electric Court",
+    "Apex Neon",
+    "Street Beam",
+    "Hyper Urban",
+    "Neon Gravity",
+    "Future Court",
+    "Volt Runner",
+    "Cosmic Step",
+    "Turbo Glow",
+    "Neon Track",
 
-    {
-        id: 5,
-        nombre: "Suede Classic",
-        marca: "Puma",
-        talla: "38",
-        color: "Negro",
-        precio: 749,
-        cantidad: 10,
-        imagen: imagenes[4]
-    },
-
-    {
-        id: 6,
-        nombre: "RS-X",
-        marca: "Puma",
-        talla: "40",
-        color: "Multicolor",
-        precio: 899,
-        cantidad: 9,
-        imagen: imagenes[5]
-    },
-
-    {
-        id: 7,
-        nombre: "574 Classic",
-        marca: "New Balance",
-        talla: "41",
-        color: "Gris",
-        precio: 949,
-        cantidad: 11,
-        imagen: imagenes[6]
-    },
-
-    {
-        id: 8,
-        nombre: "550 White",
-        marca: "New Balance",
-        talla: "42",
-        color: "Blanco / Verde",
-        precio: 1099,
-        cantidad: 6,
-        imagen: imagenes[7]
-    },
-
-    {
-        id: 9,
-        nombre: "Old Skool",
-        marca: "Vans",
-        talla: "39",
-        color: "Negro / Blanco",
-        precio: 699,
-        cantidad: 14,
-        imagen: imagenes[8]
-    },
-
-    {
-        id: 10,
-        nombre: "Chuck Taylor",
-        marca: "Converse",
-        talla: "40",
-        color: "Negro",
-        precio: 649,
-        cantidad: 13,
-        imagen: imagenes[9]
-    },
-
-
-    /* ================= PRODUCTOS 11 - 20 ================= */
-
-    {
-        id: 11,
-        nombre: "Air Jordan 1",
-        marca: "Nike",
-        talla: "42",
-        color: "Rojo / Negro",
-        precio: 1499,
-        cantidad: 5,
-        imagen: imagenes[0]
-    },
-
-    {
-        id: 12,
-        nombre: "Dunk Low",
-        marca: "Nike",
-        talla: "41",
-        color: "Azul / Blanco",
-        precio: 1199,
-        cantidad: 8,
-        imagen: imagenes[1]
-    },
-
-    {
-        id: 13,
-        nombre: "Gazelle",
-        marca: "Adidas",
-        talla: "39",
-        color: "Verde",
-        precio: 849,
-        cantidad: 9,
-        imagen: imagenes[2]
-    },
-
-    {
-        id: 14,
-        nombre: "Forum Low",
-        marca: "Adidas",
-        talla: "40",
-        color: "Blanco",
-        precio: 899,
-        cantidad: 10,
-        imagen: imagenes[3]
-    },
-
-    {
-        id: 15,
-        nombre: "Clyde",
-        marca: "Puma",
-        talla: "41",
-        color: "Blanco / Negro",
-        precio: 799,
-        cantidad: 7,
-        imagen: imagenes[4]
-    },
-
-    {
-        id: 16,
-        nombre: "Future Rider",
-        marca: "Puma",
-        talla: "42",
-        color: "Azul",
-        precio: 849,
-        cantidad: 6,
-        imagen: imagenes[5]
-    },
-
-    {
-        id: 17,
-        nombre: "327",
-        marca: "New Balance",
-        talla: "40",
-        color: "Beige",
-        precio: 999,
-        cantidad: 12,
-        imagen: imagenes[6]
-    },
-
-    {
-        id: 18,
-        nombre: "2002R",
-        marca: "New Balance",
-        talla: "43",
-        color: "Gris",
-        precio: 1299,
-        cantidad: 4,
-        imagen: imagenes[7]
-    },
-
-    {
-        id: 19,
-        nombre: "Sk8-Hi",
-        marca: "Vans",
-        talla: "42",
-        color: "Negro",
-        precio: 749,
-        cantidad: 10,
-        imagen: imagenes[8]
-    },
-
-    {
-        id: 20,
-        nombre: "Run Star Hike",
-        marca: "Converse",
-        talla: "39",
-        color: "Negro",
-        precio: 899,
-        cantidad: 8,
-        imagen: imagenes[9]
-    },
-
-
-    /* ================= PRODUCTOS 21 - 30 ================= */
-
-    {
-        id: 21,
-        nombre: "Blazer Mid",
-        marca: "Nike",
-        talla: "40",
-        color: "Blanco",
-        precio: 899,
-        cantidad: 7,
-        imagen: imagenes[0]
-    },
-
-    {
-        id: 22,
-        nombre: "Pegasus",
-        marca: "Nike",
-        talla: "41",
-        color: "Negro / Verde",
-        precio: 1099,
-        cantidad: 8,
-        imagen: imagenes[1]
-    },
-
-    {
-        id: 23,
-        nombre: "Stan Smith",
-        marca: "Adidas",
-        talla: "38",
-        color: "Blanco / Verde",
-        precio: 799,
-        cantidad: 11,
-        imagen: imagenes[2]
-    },
-
-    {
-        id: 24,
-        nombre: "NMD R1",
-        marca: "Adidas",
-        talla: "42",
-        color: "Negro",
-        precio: 1199,
-        cantidad: 5,
-        imagen: imagenes[3]
-    },
-
-    {
-        id: 25,
-        nombre: "Roma",
-        marca: "Puma",
-        talla: "39",
-        color: "Blanco",
-        precio: 699,
-        cantidad: 13,
-        imagen: imagenes[4]
-    },
-
-    {
-        id: 26,
-        nombre: "Mayze",
-        marca: "Puma",
-        talla: "40",
-        color: "Blanco / Rosa",
-        precio: 899,
-        cantidad: 8,
-        imagen: imagenes[5]
-    },
-
-    {
-        id: 27,
-        nombre: "996",
-        marca: "New Balance",
-        talla: "41",
-        color: "Azul",
-        precio: 999,
-        cantidad: 6,
-        imagen: imagenes[6]
-    },
-
-    {
-        id: 28,
-        nombre: "9060",
-        marca: "New Balance",
-        talla: "42",
-        color: "Crema",
-        precio: 1399,
-        cantidad: 5,
-        imagen: imagenes[7]
-    },
-
-    {
-        id: 29,
-        nombre: "Authentic",
-        marca: "Vans",
-        talla: "38",
-        color: "Negro",
-        precio: 599,
-        cantidad: 15,
-        imagen: imagenes[8]
-    },
-
-    {
-        id: 30,
-        nombre: "One Star",
-        marca: "Converse",
-        talla: "40",
-        color: "Blanco",
-        precio: 749,
-        cantidad: 9,
-        imagen: imagenes[9]
-    },
-
-
-    /* ================= PRODUCTOS 31 - 40 ================= */
-
-    {
-        id: 31,
-        nombre: "Vomero 5",
-        marca: "Nike",
-        talla: "42",
-        color: "Gris",
-        precio: 1199,
-        cantidad: 5,
-        imagen: imagenes[0]
-    },
-
-    {
-        id: 32,
-        nombre: "Cortez",
-        marca: "Nike",
-        talla: "39",
-        color: "Blanco / Rojo",
-        precio: 749,
-        cantidad: 10,
-        imagen: imagenes[1]
-    },
-
-    {
-        id: 33,
-        nombre: "Campus 00s",
-        marca: "Adidas",
-        talla: "41",
-        color: "Verde",
-        precio: 899,
-        cantidad: 8,
-        imagen: imagenes[2]
-    },
-
-    {
-        id: 34,
-        nombre: "Rivalry Low",
-        marca: "Adidas",
-        talla: "42",
-        color: "Blanco / Azul",
-        precio: 849,
-        cantidad: 9,
-        imagen: imagenes[3]
-    },
-
-    {
-        id: 35,
-        nombre: "Slipstream",
-        marca: "Puma",
-        talla: "40",
-        color: "Blanco / Verde",
-        precio: 899,
-        cantidad: 7,
-        imagen: imagenes[4]
-    },
-
-    {
-        id: 36,
-        nombre: "Palermo",
-        marca: "Puma",
-        talla: "39",
-        color: "Azul",
-        precio: 799,
-        cantidad: 10,
-        imagen: imagenes[5]
-    },
-
-    {
-        id: 37,
-        nombre: "FuelCell",
-        marca: "New Balance",
-        talla: "43",
-        color: "Negro",
-        precio: 1099,
-        cantidad: 6,
-        imagen: imagenes[6]
-    },
-
-    {
-        id: 38,
-        nombre: "Fresh Foam",
-        marca: "New Balance",
-        talla: "41",
-        color: "Azul",
-        precio: 999,
-        cantidad: 8,
-        imagen: imagenes[7]
-    },
-
-    {
-        id: 39,
-        nombre: "Era",
-        marca: "Vans",
-        talla: "40",
-        color: "Rojo",
-        precio: 649,
-        cantidad: 12,
-        imagen: imagenes[8]
-    },
-
-    {
-        id: 40,
-        nombre: "Pro Leather",
-        marca: "Converse",
-        talla: "42",
-        color: "Blanco",
-        precio: 699,
-        cantidad: 9,
-        imagen: imagenes[9]
-    },
-
-
-    /* ================= PRODUCTOS 41 - 45 ================= */
-
-    {
-        id: 41,
-        nombre: "Air Max Plus",
-        marca: "Nike",
-        talla: "43",
-        color: "Negro / Azul",
-        precio: 1299,
-        cantidad: 5,
-        imagen: imagenes[0]
-    },
-
-    {
-        id: 42,
-        nombre: "Adizero",
-        marca: "Adidas",
-        talla: "42",
-        color: "Negro / Blanco",
-        precio: 1199,
-        cantidad: 7,
-        imagen: imagenes[2]
-    },
-
-    {
-        id: 43,
-        nombre: "RS-Curve",
-        marca: "Puma",
-        talla: "41",
-        color: "Gris",
-        precio: 849,
-        cantidad: 8,
-        imagen: imagenes[4]
-    },
-
-    {
-        id: 44,
-        nombre: "9060 Shadow",
-        marca: "New Balance",
-        talla: "42",
-        color: "Gris / Blanco",
-        precio: 1399,
-        cantidad: 4,
-        imagen: imagenes[6]
-    },
-
-    {
-        id: 45,
-        nombre: "Chuck 70",
-        marca: "Converse",
-        talla: "40",
-        color: "Negro",
-        precio: 799,
-        cantidad: 10,
-        imagen: imagenes[9]
-    }
+    "Digital Dash",
+    "Urban Spark",
+    "Neon Impact",
+    "Flash Runner",
+    "Cyber Flex",
+    "Neon Legend",
+    "Infinity Step"
 
 ];
 
 
+const categorias = [
+
+    "Running",
+    "Urbano",
+    "Basket",
+    "Casual",
+    "Outdoor"
+
+];
+
+
+const colores = [
+
+    "Negro / Verde neón",
+    "Blanco / Rosa neón",
+    "Negro / Azul eléctrico",
+    "Gris / Lima",
+    "Blanco / Cian",
+    "Morado / Rosa",
+    "Negro / Naranja",
+    "Azul / Cian"
+
+];
+
+
+
 /* =====================================================
-   FORMATO DE QUETZALES
+   CREAR PRODUCTOS
 ===================================================== */
 
-function formatoQuetzales(precio) {
+function crearProductosIniciales() {
 
-    return new Intl.NumberFormat("es-GT", {
-        style: "currency",
-        currency: "GTQ",
-        minimumFractionDigits: 2
-    }).format(precio);
+    return nombres.map((nombre, indice) => {
+
+        return {
+
+            id: indice + 1,
+
+            nombre: nombre,
+
+            marca: "NEONKICKS GT",
+
+            categoria:
+                categorias[indice % categorias.length],
+
+            talla:
+                38 + (indice % 6),
+
+            color:
+                colores[indice % colores.length],
+
+            precio:
+                399 +
+                (indice % 10) * 35 +
+                (indice % 3) * 10,
+
+            cantidad:
+                5 + ((indice * 3) % 26),
+
+            imagen:
+                imagenes[indice % imagenes.length]
+
+        };
+
+    });
 
 }
+
+
+
+/* =====================================================
+   CARGAR PRODUCTOS
+===================================================== */
+
+let productos =
+    JSON.parse(
+        localStorage.getItem(CLAVE_PRODUCTOS)
+    ) || crearProductosIniciales();
+
+
+
+/* =====================================================
+   CARGAR CARRITO
+===================================================== */
+
+let carrito =
+    JSON.parse(
+        localStorage.getItem(CLAVE_CARRITO)
+    ) || [];
+
+
+
+/* =====================================================
+   GUARDAR PRODUCTOS
+===================================================== */
+
+function guardarProductos() {
+
+    localStorage.setItem(
+        CLAVE_PRODUCTOS,
+        JSON.stringify(productos)
+    );
+
+}
+
+
+
+/* =====================================================
+   GUARDAR CARRITO
+===================================================== */
+
+function guardarCarrito() {
+
+    localStorage.setItem(
+        CLAVE_CARRITO,
+        JSON.stringify(carrito)
+    );
+
+}
+
+
+
+/* =====================================================
+   FORMATO DE DINERO
+===================================================== */
+
+function dinero(numero) {
+
+    return "Q " +
+        Number(numero).toLocaleString(
+            "es-GT",
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
+
+}
+
+
+
+/* =====================================================
+   ESCAPAR TEXTO
+===================================================== */
+
+function escapar(texto) {
+
+    return String(texto).replace(
+        /[&<>"']/g,
+        function (caracter) {
+
+            const caracteres = {
+
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#039;"
+
+            };
+
+            return caracteres[caracter];
+
+        }
+    );
+
+}
+
 
 
 /* =====================================================
    MOSTRAR PRODUCTOS
 ===================================================== */
 
-function mostrarProductos(lista = productos) {
+function mostrarProductos() {
 
-    const container =
-        document.getElementById("productosContainer");
+    const contenedor =
+        document.getElementById(
+            "contenedorProductos"
+        );
 
-    container.innerHTML = "";
+
+    const busqueda =
+        document.getElementById(
+            "buscarProducto"
+        ).value.toLowerCase();
 
 
-    if (lista.length === 0) {
+    const categoria =
+        document.getElementById(
+            "filtroCategoria"
+        ).value;
 
-        container.innerHTML = `
+
+    const resultados =
+        productos.filter(function(producto) {
+
+            const coincideBusqueda =
+
+                producto.nombre
+                    .toLowerCase()
+                    .includes(busqueda)
+
+                ||
+
+                producto.marca
+                    .toLowerCase()
+                    .includes(busqueda)
+
+                ||
+
+                producto.color
+                    .toLowerCase()
+                    .includes(busqueda);
+
+
+            const coincideCategoria =
+
+                categoria === "Todos"
+
+                ||
+
+                producto.categoria === categoria;
+
+
+            return (
+                coincideBusqueda &&
+                coincideCategoria
+            );
+
+        });
+
+
+
+    if (resultados.length === 0) {
+
+        contenedor.innerHTML = `
+
             <div style="
-                grid-column: 1/-1;
+                grid-column:1/-1;
                 text-align:center;
                 padding:50px;
-                color:#777;
+                color:#9da6c5;
             ">
-                <h3>No se encontraron productos</h3>
-                <p>Prueba con otra búsqueda.</p>
+
+                No se encontraron productos.
+
             </div>
+
         `;
 
         return;
+
     }
 
 
-    lista.forEach(producto => {
 
-        const card = document.createElement("div");
+    contenedor.innerHTML =
+        resultados.map(function(producto) {
 
-        card.className = "producto-card";
+            return `
 
+                <article class="producto">
 
-        card.innerHTML = `
+                    <div class="producto-imagen">
 
-            <div class="producto-imagen">
+                        <img
+                            src="${producto.imagen}"
+                            alt="${escapar(producto.nombre)}"
+                            onerror="
+                                this.src='${imagenes[0]}'
+                            "
+                        >
 
-                <img
-                    src="${producto.imagen}"
-                    alt="${producto.nombre}"
-                    loading="lazy"
-                    onerror="this.src='${imagenes[0]}'"
-                >
+                        <span class="categoria">
 
-            </div>
+                            ${escapar(producto.categoria)}
 
+                        </span>
 
-            <div class="producto-info">
+                        <span class="stock">
 
-                <span class="marca">
-                    ${producto.marca}
-                </span>
+                            ${
+                                producto.cantidad > 0
+                                ?
+                                producto.cantidad +
+                                " disponibles"
+                                :
+                                "Agotado"
+                            }
 
-                <h3>
-                    ${producto.nombre}
-                </h3>
+                        </span>
 
-
-                <div class="detalles">
-
-                    <span>
-                        👟 Talla: ${producto.talla}
-                    </span>
-
-                    <span>
-                        🎨 ${producto.color}
-                    </span>
-
-                </div>
+                    </div>
 
 
-                <div class="precio">
+                    <div class="producto-info">
 
-                    ${formatoQuetzales(producto.precio)}
+                        <span class="marca">
 
-                </div>
+                            ${escapar(producto.marca)}
 
+                        </span>
 
-                <div class="
-                    stock
-                    ${producto.cantidad > 0
-                        ? "disponible"
-                        : "agotado"}
-                ">
+                        <h3>
 
-                    ${
-                        producto.cantidad > 0
-                        ? `✓ ${producto.cantidad} disponibles`
-                        : "✕ Agotado"
-                    }
+                            ${escapar(producto.nombre)}
 
-                </div>
+                        </h3>
 
-            </div>
+                        <p class="detalles">
 
-        `;
+                            Talla ${escapar(producto.talla)}
+                            ·
+                            ${escapar(producto.color)}
+
+                        </p>
 
 
-        container.appendChild(card);
+                        <div class="precio-fila">
 
-    });
+                            <span class="precio">
+
+                                ${dinero(producto.precio)}
+
+                            </span>
+
+
+                            <button
+                                class="btn-comprar"
+                                onclick="
+                                    agregarCarrito(
+                                        ${producto.id}
+                                    )
+                                "
+                                ${
+                                    producto.cantidad <= 0
+                                    ?
+                                    "disabled"
+                                    :
+                                    ""
+                                }
+                            >
+
+                                🛒 Agregar
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EDITAR Y ELIMINAR -->
+
+                    <div class="acciones-producto">
+
+                        <button
+                            class="btn-editar"
+                            onclick="
+                                editarProducto(
+                                    ${producto.id}
+                                )
+                            "
+                        >
+
+                            ✏️ Editar
+
+                        </button>
+
+
+                        <button
+                            class="btn-eliminar"
+                            onclick="
+                                eliminarProducto(
+                                    ${producto.id}
+                                )
+                            "
+                        >
+
+                            🗑️ Eliminar
+
+                        </button>
+
+                    </div>
+
+                </article>
+
+            `;
+
+        }).join("");
+
+
+    document.getElementById(
+        "totalProductosInicio"
+    ).textContent =
+        productos.length + "+";
 
 }
 
 
+
 /* =====================================================
-   MOSTRAR TABLA
+   MOSTRAR TABLA ADMINISTRACIÓN
 ===================================================== */
 
 function mostrarTabla() {
 
     const tabla =
-        document.getElementById("tablaProductos");
-
-    tabla.innerHTML = "";
-
-
-    productos.forEach(producto => {
-
-        const fila =
-            document.createElement("tr");
+        document.getElementById(
+            "tablaProductos"
+        );
 
 
-        fila.innerHTML = `
+    tabla.innerHTML =
+        productos.map(function(producto) {
 
-            <td>
+            return `
 
-                <img
-                    src="${producto.imagen}"
-                    class="tabla-img"
-                    alt="${producto.nombre}"
-                    onerror="this.src='${imagenes[0]}'"
-                >
+                <tr>
 
-            </td>
+                    <td>
 
+                        <img
+                            src="${producto.imagen}"
+                            alt=""
+                        >
 
-            <td>
-                ${producto.nombre}
-            </td>
+                    </td>
 
 
-            <td>
-                ${producto.marca}
-            </td>
+                    <td>
+
+                        <strong>
+
+                            ${escapar(producto.nombre)}
+
+                        </strong>
+
+                        <br>
+
+                        <small>
+
+                            ${escapar(producto.categoria)}
+
+                        </small>
+
+                    </td>
 
 
-            <td>
-                ${producto.talla}
-            </td>
+                    <td>
+
+                        ${escapar(producto.marca)}
+
+                    </td>
 
 
-            <td>
-                ${producto.color}
-            </td>
+                    <td>
+
+                        ${escapar(producto.talla)}
+
+                    </td>
 
 
-            <td>
-                <strong style="color:#00ffff">
-                    ${formatoQuetzales(producto.precio)}
-                </strong>
-            </td>
+                    <td>
+
+                        ${escapar(producto.color)}
+
+                    </td>
 
 
-            <td>
-                ${producto.cantidad}
-            </td>
+                    <td>
+
+                        ${dinero(producto.precio)}
+
+                    </td>
 
 
-            <td>
+                    <td>
 
-                <button
-                    class="btn-editar"
-                    onclick="editarProducto(${producto.id})"
-                >
-                    ✏️ Editar
-                </button>
+                        ${producto.cantidad}
+
+                    </td>
 
 
-                <button
-                    class="btn-eliminar"
-                    onclick="eliminarProducto(${producto.id})"
-                >
-                    🗑️ Eliminar
-                </button>
+                    <td>
 
-            </td>
+                        <div class="acciones-tabla">
 
-        `;
+                            <button
+                                class="pequeno editar"
+                                onclick="
+                                    editarProducto(
+                                        ${producto.id}
+                                    )
+                                "
+                            >
+
+                                ✏ Editar
+
+                            </button>
 
 
-        tabla.appendChild(fila);
+                            <button
+                                class="pequeno eliminar"
+                                onclick="
+                                    eliminarProducto(
+                                        ${producto.id}
+                                    )
+                                "
+                            >
 
-    });
+                                🗑 Eliminar
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }).join("");
 
 }
 
 
+
 /* =====================================================
-   ESTADÍSTICAS
+   ABRIR FORMULARIO
 ===================================================== */
 
-function actualizarEstadisticas() {
+function abrirFormulario(producto = null) {
 
-    document.getElementById("totalProductos")
-        .textContent = productos.length;
-
-
-    const totalStock = productos.reduce(
-        (total, producto) =>
-            total + Number(producto.cantidad),
-        0
-    );
+    document
+        .getElementById("modalProducto")
+        .classList.add("activo");
 
 
-    document.getElementById("totalStock")
-        .textContent = totalStock;
+    document
+        .getElementById("tituloFormulario")
+        .textContent =
+
+        producto
+        ?
+        "Editar producto"
+        :
+        "Registrar producto";
+
+
+    document.getElementById(
+        "productoId"
+    ).value =
+        producto ? producto.id : "";
+
+
+    document.getElementById(
+        "nombre"
+    ).value =
+        producto ? producto.nombre : "";
+
+
+    document.getElementById(
+        "marca"
+    ).value =
+        producto
+        ?
+        producto.marca
+        :
+        "NEONKICKS GT";
+
+
+    document.getElementById(
+        "categoria"
+    ).value =
+        producto
+        ?
+        producto.categoria
+        :
+        "Running";
+
+
+    document.getElementById(
+        "talla"
+    ).value =
+        producto ? producto.talla : "40";
+
+
+    document.getElementById(
+        "color"
+    ).value =
+        producto
+        ?
+        producto.color
+        :
+        "Negro / Verde neón";
+
+
+    document.getElementById(
+        "precio"
+    ).value =
+        producto ? producto.precio : "499";
+
+
+    document.getElementById(
+        "cantidad"
+    ).value =
+        producto ? producto.cantidad : "10";
+
+
+    document.getElementById(
+        "imagen"
+    ).value =
+        producto
+        ?
+        producto.imagen
+        :
+        imagenes[0];
 
 }
 
-
-/* =====================================================
-   AGREGAR / EDITAR
-===================================================== */
-
-const formulario =
-    document.getElementById("productoForm");
-
-
-formulario.addEventListener("submit", function(event) {
-
-    event.preventDefault();
-
-
-    const id =
-        document.getElementById("productoId").value;
-
-
-    const nuevoProducto = {
-
-        nombre:
-            document.getElementById("nombre").value,
-
-        marca:
-            document.getElementById("marca").value,
-
-        talla:
-            document.getElementById("talla").value,
-
-        color:
-            document.getElementById("color").value,
-
-        precio:
-            Number(document.getElementById("precio").value),
-
-        cantidad:
-            Number(document.getElementById("cantidad").value),
-
-        imagen:
-            document.getElementById("imagen").value
-
-    };
-
-
-    /* ================= EDITAR ================= */
-
-    if (id) {
-
-        const indice =
-            productos.findIndex(
-                producto =>
-                    producto.id === Number(id)
-            );
-
-
-        if (indice !== -1) {
-
-            productos[indice] = {
-
-                id: Number(id),
-
-                ...nuevoProducto
-
-            };
-
-        }
-
-    }
-
-
-    /* ================= AGREGAR ================= */
-
-    else {
-
-        const nuevoId =
-            productos.length > 0
-                ? Math.max(
-                    ...productos.map(p => p.id)
-                ) + 1
-                : 1;
-
-
-        productos.push({
-
-            id: nuevoId,
-
-            ...nuevoProducto
-
-        });
-
-    }
-
-
-    formulario.reset();
-
-    document.getElementById("productoId").value = "";
-
-    document.getElementById("btnGuardar")
-        .textContent = "➕ AGREGAR PRODUCTO";
-
-
-    mostrarProductos();
-
-    mostrarTabla();
-
-    actualizarEstadisticas();
-
-
-    alert("Producto guardado correctamente. ✓");
-
-});
 
 
 /* =====================================================
@@ -909,57 +735,21 @@ formulario.addEventListener("submit", function(event) {
 function editarProducto(id) {
 
     const producto =
-        productos.find(
-            producto =>
-                producto.id === id
-        );
+        productos.find(function(p) {
 
+            return p.id === id;
 
-    if (!producto) return;
-
-
-    document.getElementById("productoId")
-        .value = producto.id;
-
-
-    document.getElementById("nombre")
-        .value = producto.nombre;
-
-
-    document.getElementById("marca")
-        .value = producto.marca;
-
-
-    document.getElementById("talla")
-        .value = producto.talla;
-
-
-    document.getElementById("color")
-        .value = producto.color;
-
-
-    document.getElementById("precio")
-        .value = producto.precio;
-
-
-    document.getElementById("cantidad")
-        .value = producto.cantidad;
-
-
-    document.getElementById("imagen")
-        .value = producto.imagen;
-
-
-    document.getElementById("btnGuardar")
-        .textContent = "💾 GUARDAR CAMBIOS";
-
-
-    document.getElementById("administrar")
-        .scrollIntoView({
-            behavior: "smooth"
         });
 
+
+    if (producto) {
+
+        abrirFormulario(producto);
+
+    }
+
 }
+
 
 
 /* =====================================================
@@ -969,10 +759,11 @@ function editarProducto(id) {
 function eliminarProducto(id) {
 
     const producto =
-        productos.find(
-            producto =>
-                producto.id === id
-        );
+        productos.find(function(p) {
+
+            return p.id === id;
+
+        });
 
 
     if (!producto) return;
@@ -980,7 +771,9 @@ function eliminarProducto(id) {
 
     const confirmar =
         confirm(
-            `¿Deseas eliminar "${producto.nombre}"?`
+            "¿Seguro que deseas eliminar " +
+            producto.nombre +
+            "?"
         );
 
 
@@ -988,121 +781,978 @@ function eliminarProducto(id) {
 
 
     productos =
-        productos.filter(
-            producto =>
-                producto.id !== id
+        productos.filter(function(p) {
+
+            return p.id !== id;
+
+        });
+
+
+    carrito =
+        carrito.filter(function(item) {
+
+            return item.id !== id;
+
+        });
+
+
+    guardarProductos();
+
+    guardarCarrito();
+
+    mostrarProductos();
+
+    mostrarTabla();
+
+    mostrarCarrito();
+
+    notificar(
+        "Producto eliminado correctamente."
+    );
+
+}
+
+
+
+/* =====================================================
+   GUARDAR PRODUCTO
+===================================================== */
+
+document
+    .getElementById("formProducto")
+    .addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const id =
+                Number(
+                    document.getElementById(
+                        "productoId"
+                    ).value
+                );
+
+
+            const nuevoProducto = {
+
+                nombre:
+                    document.getElementById(
+                        "nombre"
+                    ).value.trim(),
+
+                marca:
+                    document.getElementById(
+                        "marca"
+                    ).value.trim(),
+
+                categoria:
+                    document.getElementById(
+                        "categoria"
+                    ).value,
+
+                talla:
+                    document.getElementById(
+                        "talla"
+                    ).value.trim(),
+
+                color:
+                    document.getElementById(
+                        "color"
+                    ).value.trim(),
+
+                precio:
+                    Number(
+                        document.getElementById(
+                            "precio"
+                        ).value
+                    ),
+
+                cantidad:
+                    Number(
+                        document.getElementById(
+                            "cantidad"
+                        ).value
+                    ),
+
+                imagen:
+                    document.getElementById(
+                        "imagen"
+                    ).value.trim()
+
+            };
+
+
+
+            /* EDITAR */
+
+            if (id) {
+
+                const indice =
+                    productos.findIndex(
+                        function(p) {
+
+                            return p.id === id;
+
+                        }
+                    );
+
+
+                if (indice !== -1) {
+
+                    productos[indice] = {
+
+                        id: id,
+
+                        ...nuevoProducto
+
+                    };
+
+                }
+
+
+                notificar(
+                    "Producto actualizado correctamente."
+                );
+
+            }
+
+
+            /* REGISTRAR */
+
+            else {
+
+                productos.unshift({
+
+                    id: Date.now(),
+
+                    ...nuevoProducto
+
+                });
+
+
+                notificar(
+                    "Producto registrado correctamente."
+                );
+
+            }
+
+
+            guardarProductos();
+
+            mostrarProductos();
+
+            mostrarTabla();
+
+            cerrarModal(
+                "modalProducto"
+            );
+
+
+            this.reset();
+
+
+            document.getElementById(
+                "marca"
+            ).value =
+                "NEONKICKS GT";
+
+        }
+    );
+
+
+
+/* =====================================================
+   AGREGAR AL CARRITO
+===================================================== */
+
+function agregarCarrito(id) {
+
+    const producto =
+        productos.find(function(p) {
+
+            return p.id === id;
+
+        });
+
+
+    if (!producto) return;
+
+
+    if (producto.cantidad <= 0) {
+
+        notificar(
+            "Este producto está agotado."
         );
+
+        return;
+
+    }
+
+
+    const existente =
+        carrito.find(function(item) {
+
+            return item.id === id;
+
+        });
+
+
+    if (existente) {
+
+        if (
+            existente.cantidad <
+            producto.cantidad
+        ) {
+
+            existente.cantidad++;
+
+        }
+
+        else {
+
+            notificar(
+                "No hay más unidades disponibles."
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    else {
+
+        carrito.push({
+
+            id: id,
+
+            cantidad: 1
+
+        });
+
+    }
+
+
+    guardarCarrito();
+
+    mostrarCarrito();
+
+    notificar(
+        "Producto agregado al carrito 🛒"
+    );
+
+}
+
+
+
+/* =====================================================
+   MOSTRAR CARRITO
+===================================================== */
+
+function mostrarCarrito() {
+
+    const contenedor =
+        document.getElementById(
+            "productosCarrito"
+        );
+
+
+    let total = 0;
+
+    let cantidadTotal = 0;
+
+
+    if (carrito.length === 0) {
+
+        contenedor.innerHTML = `
+
+            <div style="
+                text-align:center;
+                padding:40px;
+                color:#9da6c5;
+            ">
+
+                🛒 Tu carrito está vacío.
+
+            </div>
+
+        `;
+
+        document.getElementById(
+            "totalCarrito"
+        ).textContent =
+            "Q 0.00";
+
+        document.getElementById(
+            "cantidadCarrito"
+        ).textContent =
+            "0";
+
+        return;
+
+    }
+
+
+
+    contenedor.innerHTML =
+        carrito.map(function(item) {
+
+            const producto =
+                productos.find(function(p) {
+
+                    return p.id === item.id;
+
+                });
+
+
+            if (!producto) return "";
+
+
+            const subtotal =
+                producto.precio *
+                item.cantidad;
+
+
+            total += subtotal;
+
+            cantidadTotal +=
+                item.cantidad;
+
+
+            return `
+
+                <div class="item-carrito">
+
+                    <img
+                        src="${producto.imagen}"
+                        alt=""
+                    >
+
+
+                    <div>
+
+                        <strong>
+
+                            ${escapar(
+                                producto.nombre
+                            )}
+
+                        </strong>
+
+                        <small>
+
+                            ${dinero(
+                                producto.precio
+                            )}
+
+                        </small>
+
+                    </div>
+
+
+                    <div class="cantidad">
+
+                        <button
+                            onclick="
+                                cambiarCantidad(
+                                    ${producto.id},
+                                    -1
+                                )
+                            "
+                        >
+                            −
+                        </button>
+
+
+                        <span>
+
+                            ${item.cantidad}
+
+                        </span>
+
+
+                        <button
+                            onclick="
+                                cambiarCantidad(
+                                    ${producto.id},
+                                    1
+                                )
+                            "
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        class="eliminar-carrito"
+                        onclick="
+                            quitarCarrito(
+                                ${producto.id}
+                            )
+                        "
+                    >
+
+                        🗑
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+
+    document.getElementById(
+        "totalCarrito"
+    ).textContent =
+        dinero(total);
+
+
+    document.getElementById(
+        "cantidadCarrito"
+    ).textContent =
+        cantidadTotal;
+
+
+    guardarCarrito();
+
+}
+
+
+
+/* =====================================================
+   CAMBIAR CANTIDAD
+===================================================== */
+
+function cambiarCantidad(id, cambio) {
+
+    const item =
+        carrito.find(function(i) {
+
+            return i.id === id;
+
+        });
+
+
+    const producto =
+        productos.find(function(p) {
+
+            return p.id === id;
+
+        });
+
+
+    if (!item || !producto) return;
+
+
+    item.cantidad += cambio;
+
+
+    if (item.cantidad <= 0) {
+
+        quitarCarrito(id);
+
+        return;
+
+    }
+
+
+    if (
+        item.cantidad >
+        producto.cantidad
+    ) {
+
+        item.cantidad =
+            producto.cantidad;
+
+        notificar(
+            "No hay más unidades disponibles."
+        );
+
+    }
+
+
+    guardarCarrito();
+
+    mostrarCarrito();
+
+}
+
+
+
+/* =====================================================
+   QUITAR DEL CARRITO
+===================================================== */
+
+function quitarCarrito(id) {
+
+    carrito =
+        carrito.filter(function(item) {
+
+            return item.id !== id;
+
+        });
+
+
+    guardarCarrito();
+
+    mostrarCarrito();
+
+}
+
+
+
+/* =====================================================
+   ABRIR CARRITO
+===================================================== */
+
+function abrirCarrito() {
+
+    mostrarCarrito();
+
+    document
+        .getElementById("modalCarrito")
+        .classList.add("activo");
+
+}
+
+
+
+/* =====================================================
+   FINALIZAR COMPRA
+===================================================== */
+
+function finalizarCompra() {
+
+    if (carrito.length === 0) {
+
+        notificar(
+            "Agrega productos al carrito primero."
+        );
+
+        return;
+
+    }
+
+
+    const productosCompra = [];
+
+
+    carrito.forEach(function(item) {
+
+        const producto =
+            productos.find(function(p) {
+
+                return p.id === item.id;
+
+            });
+
+
+        if (producto) {
+
+            productosCompra.push({
+
+                producto: producto,
+
+                cantidad: item.cantidad
+
+            });
+
+        }
+
+    });
+
+
+    if (
+        productosCompra.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    /* =============================================
+       CALCULAR TOTAL
+    ============================================= */
+
+    let total = 0;
+
+
+    productosCompra.forEach(
+        function(item) {
+
+            total +=
+                item.producto.precio *
+                item.cantidad;
+
+        }
+    );
+
+
+
+    /* =============================================
+       NÚMERO DE FACTURA
+    ============================================= */
+
+    const numeroFactura =
+        "NG-" +
+        new Date().getFullYear() +
+        "-" +
+        String(
+            Date.now()
+        ).slice(-6);
+
+
+
+    /* =============================================
+       FECHA
+    ============================================= */
+
+    const fecha =
+        new Date().toLocaleString(
+            "es-GT"
+        );
+
+
+
+    /* =============================================
+       CREAR FACTURA
+    ============================================= */
+
+    let filas = "";
+
+
+    productosCompra.forEach(
+        function(item) {
+
+            const subtotal =
+                item.producto.precio *
+                item.cantidad;
+
+
+            filas += `
+
+                <tr>
+
+                    <td>
+
+                        ${escapar(
+                            item.producto.nombre
+                        )}
+
+                        <br>
+
+                        <small>
+
+                            Talla:
+                            ${escapar(
+                                item.producto.talla
+                            )}
+
+                            ·
+
+                            ${escapar(
+                                item.producto.color
+                            )}
+
+                        </small>
+
+                    </td>
+
+
+                    <td>
+
+                        ${item.cantidad}
+
+                    </td>
+
+
+                    <td>
+
+                        ${dinero(
+                            item.producto.precio
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        ${dinero(
+                            subtotal
+                        )}
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
+
+    document.getElementById(
+        "contenidoFactura"
+    ).innerHTML = `
+
+        <div class="encabezado-factura">
+
+            <div>
+
+                <div class="marca-factura">
+
+                    <span>NEON</span>KICKS
+                    <b>GT</b>
+
+                </div>
+
+                <small>
+                    Venta de calzado
+                </small>
+
+            </div>
+
+
+            <div class="datos-factura">
+
+                <strong>
+                    FACTURA
+                </strong>
+
+                <br>
+
+                No.
+                ${numeroFactura}
+
+                <br>
+
+                ${fecha}
+
+            </div>
+
+        </div>
+
+
+
+        <table class="tabla-factura">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Producto
+                    </th>
+
+                    <th>
+                        Cant.
+                    </th>
+
+                    <th>
+                        Precio
+                    </th>
+
+                    <th>
+                        Total
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                ${filas}
+
+            </tbody>
+
+        </table>
+
+
+
+        <div class="total-factura">
+
+            TOTAL:
+            ${dinero(total)}
+
+        </div>
+
+
+        <p class="nota-factura">
+
+            Gracias por comprar en
+            NEONKICKS GT.
+
+            Esta factura fue generada
+            automáticamente por el sistema
+            de ventas.
+
+        </p>
+
+    `;
+
+
+
+    /* =============================================
+       ACTUALIZAR INVENTARIO
+    ============================================= */
+
+    productosCompra.forEach(
+        function(item) {
+
+            item.producto.cantidad -=
+                item.cantidad;
+
+        }
+    );
+
+
+
+    /* =============================================
+       VACIAR CARRITO
+    ============================================= */
+
+    carrito = [];
+
+
+
+    guardarProductos();
+
+    guardarCarrito();
+
 
 
     mostrarProductos();
 
     mostrarTabla();
 
-    actualizarEstadisticas();
+    mostrarCarrito();
+
+
+
+    /* =============================================
+       CERRAR CARRITO
+    ============================================= */
+
+    cerrarModal(
+        "modalCarrito"
+    );
+
+
+
+    /* =============================================
+       MOSTRAR UNA SOLA FACTURA
+    ============================================= */
+
+    document
+        .getElementById("modalFactura")
+        .classList.add("activo");
 
 }
 
 
+
 /* =====================================================
-   CANCELAR EDICIÓN
+   CERRAR MODAL
+===================================================== */
+
+function cerrarModal(id) {
+
+    document
+        .getElementById(id)
+        .classList.remove("activo");
+
+}
+
+
+
+/* =====================================================
+   NOTIFICACIONES
+===================================================== */
+
+function notificar(mensaje) {
+
+    const notificacion =
+        document.getElementById(
+            "notificacion"
+        );
+
+
+    notificacion.textContent =
+        mensaje;
+
+
+    notificacion.classList.add(
+        "mostrar"
+    );
+
+
+    clearTimeout(
+        window.temporizadorNotificacion
+    );
+
+
+    window.temporizadorNotificacion =
+        setTimeout(
+            function() {
+
+                notificacion.classList.remove(
+                    "mostrar"
+                );
+
+            },
+            2500
+        );
+
+}
+
+
+
+/* =====================================================
+   CERRAR MODAL AL DAR CLICK FUERA
 ===================================================== */
 
 document
-    .getElementById("btnCancelar")
-    .addEventListener("click", function() {
+    .querySelectorAll(".modal")
+    .forEach(function(modal) {
 
-        formulario.reset();
+        modal.addEventListener(
+            "click",
+            function(event) {
 
-        document.getElementById("productoId")
-            .value = "";
+                if (
+                    event.target === modal
+                ) {
 
-        document.getElementById("btnGuardar")
-            .textContent = "➕ AGREGAR PRODUCTO";
+                    modal.classList.remove(
+                        "activo"
+                    );
+
+                }
+
+            }
+        );
 
     });
 
 
-/* =====================================================
-   BUSCADOR
-===================================================== */
-
-document
-    .getElementById("buscar")
-    .addEventListener("input", filtrar);
-
 
 /* =====================================================
-   FILTRO DE MARCA
-===================================================== */
-
-document
-    .getElementById("filtroMarca")
-    .addEventListener("change", filtrar);
-
-
-/* =====================================================
-   FUNCIÓN DE FILTRADO
-===================================================== */
-
-function filtrar() {
-
-    const texto =
-        document
-            .getElementById("buscar")
-            .value
-            .toLowerCase();
-
-
-    const marca =
-        document
-            .getElementById("filtroMarca")
-            .value;
-
-
-    const resultado =
-        productos.filter(producto => {
-
-            const coincideTexto =
-
-                producto.nombre
-                    .toLowerCase()
-                    .includes(texto)
-
-                ||
-
-                producto.marca
-                    .toLowerCase()
-                    .includes(texto)
-
-                ||
-
-                producto.color
-                    .toLowerCase()
-                    .includes(texto);
-
-
-            const coincideMarca =
-                marca === "todas"
-                ||
-                producto.marca === marca;
-
-
-            return coincideTexto && coincideMarca;
-
-        });
-
-
-    mostrarProductos(resultado);
-
-}
-
-
-/* =====================================================
-   INICIAR SISTEMA
+   INICIALIZAR SISTEMA
 ===================================================== */
 
 mostrarProductos();
 
 mostrarTabla();
 
-actualizarEstadisticas();
+mostrarCarrito();
