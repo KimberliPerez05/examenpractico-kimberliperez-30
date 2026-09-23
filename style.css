@@ -1,0 +1,802 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #050510;
+    color: white;
+    font-family: "Poppins", sans-serif;
+}
+
+/* ================= HEADER ================= */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    min-height: 80px;
+    padding: 15px 6%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: rgba(5, 5, 16, 0.94);
+
+    border-bottom: 1px solid #00ffff;
+
+    box-shadow:
+        0 0 15px rgba(0, 255, 255, .3);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    font-size: 40px;
+
+    filter:
+        drop-shadow(0 0 8px #00ffff);
+}
+
+.logo h1 {
+    font-family: "Orbitron", sans-serif;
+    font-size: 21px;
+
+    color: #00ffff;
+
+    text-shadow:
+        0 0 5px #00ffff,
+        0 0 15px #00ffff;
+}
+
+.logo p {
+    font-size: 11px;
+    color: #ff00ff;
+}
+
+.nav {
+    display: flex;
+    gap: 30px;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+
+    transition: .3s;
+}
+
+.nav a:hover {
+    color: #00ffff;
+
+    text-shadow:
+        0 0 8px #00ffff;
+}
+
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 620px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 70px 8%;
+
+    background:
+        radial-gradient(
+            circle at 75% 50%,
+            rgba(255, 0, 255, .20),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 25% 40%,
+            rgba(0, 255, 255, .15),
+            transparent 30%
+        );
+}
+
+.hero-content {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hero-text {
+    max-width: 600px;
+}
+
+.tag {
+    color: #00ffff;
+    font-weight: 700;
+    letter-spacing: 3px;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.hero h2 {
+    font-family: "Orbitron", sans-serif;
+
+    font-size: clamp(45px, 7vw, 85px);
+
+    line-height: 1;
+
+    margin-bottom: 25px;
+}
+
+.hero h2 span,
+.section-title span {
+    color: #ff00ff;
+
+    text-shadow:
+        0 0 8px #ff00ff,
+        0 0 25px #ff00ff;
+}
+
+.hero-text > p:not(.tag) {
+    color: #bdbdc9;
+    max-width: 500px;
+    margin-bottom: 35px;
+}
+
+
+/* ================= ZAPATO HERO ================= */
+
+.hero-shoe {
+    position: relative;
+
+    width: 400px;
+    height: 400px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-shoe span {
+    font-size: 220px;
+
+    transform: rotate(-15deg);
+
+    filter:
+        drop-shadow(0 0 10px #00ffff)
+        drop-shadow(0 0 35px #ff00ff);
+
+    animation: floating 3s ease-in-out infinite;
+}
+
+.glow {
+    position: absolute;
+
+    width: 300px;
+    height: 120px;
+
+    background: #00ffff;
+
+    border-radius: 50%;
+
+    filter: blur(70px);
+
+    opacity: .3;
+}
+
+@keyframes floating {
+
+    0%, 100% {
+        transform: translateY(0) rotate(-15deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(-15deg);
+    }
+}
+
+
+/* ================= BOTONES ================= */
+
+.btn-neon {
+    display: inline-block;
+
+    padding: 14px 28px;
+
+    border: 2px solid #00ffff;
+
+    color: #00ffff;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+    box-shadow:
+        0 0 10px rgba(0, 255, 255, .4);
+}
+
+.btn-neon:hover {
+    background: #00ffff;
+
+    color: #050510;
+
+    box-shadow:
+        0 0 15px #00ffff,
+        0 0 40px #00ffff;
+}
+
+
+/* ================= STATS ================= */
+
+.stats {
+    padding: 40px 7%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.stat-card {
+    padding: 25px;
+
+    background: #0b0b19;
+
+    border: 1px solid #22223a;
+
+    text-align: center;
+
+    border-radius: 10px;
+
+    transition: .3s;
+}
+
+.stat-card:hover {
+    border-color: #00ffff;
+
+    box-shadow:
+        0 0 20px rgba(0, 255, 255, .25);
+}
+
+.stat-card span {
+    font-size: 30px;
+}
+
+.stat-card strong {
+    display: block;
+
+    font-family: "Orbitron";
+
+    color: #00ffff;
+
+    font-size: 28px;
+
+    margin-top: 8px;
+}
+
+.stat-card p {
+    color: #999;
+}
+
+
+/* ================= SECCIONES ================= */
+
+.section {
+    padding: 90px 7%;
+}
+
+.section-title {
+    text-align: center;
+
+    margin-bottom: 40px;
+}
+
+.section-title h2 {
+    font-family: "Orbitron";
+
+    font-size: 38px;
+}
+
+
+/* ================= FILTROS ================= */
+
+.filters {
+    display: flex;
+
+    gap: 15px;
+
+    margin-bottom: 35px;
+
+    justify-content: center;
+}
+
+.filters input,
+.filters select {
+    width: 300px;
+
+    padding: 14px;
+
+    background: #0c0c19;
+
+    color: white;
+
+    border: 1px solid #333;
+
+    border-radius: 5px;
+
+    outline: none;
+}
+
+.filters input:focus,
+.filters select:focus {
+    border-color: #00ffff;
+
+    box-shadow:
+        0 0 10px rgba(0, 255, 255, .3);
+}
+
+
+/* ================= PRODUCTOS ================= */
+
+.productos-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(240px, 1fr));
+
+    gap: 25px;
+}
+
+.producto-card {
+
+    background: #0b0b18;
+
+    border: 1px solid #26263c;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    transition: .35s;
+}
+
+.producto-card:hover {
+
+    transform: translateY(-8px);
+
+    border-color: #00ffff;
+
+    box-shadow:
+        0 0 15px rgba(0, 255, 255, .3),
+        0 0 35px rgba(255, 0, 255, .15);
+}
+
+.producto-imagen {
+
+    width: 100%;
+    height: 230px;
+
+    background: white;
+
+    overflow: hidden;
+}
+
+.producto-imagen img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: .4s;
+}
+
+.producto-card:hover
+.producto-imagen img {
+
+    transform: scale(1.08);
+}
+
+.producto-info {
+    padding: 20px;
+}
+
+.producto-info h3 {
+
+    font-size: 18px;
+
+    margin-bottom: 5px;
+}
+
+.marca {
+
+    color: #ff00ff;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.detalles {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 8px;
+
+    margin: 15px 0;
+
+    color: #aaa;
+
+    font-size: 13px;
+}
+
+.precio {
+
+    color: #00ffff;
+
+    font-family: "Orbitron";
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    text-shadow:
+        0 0 8px #00ffff;
+}
+
+.stock {
+
+    margin-top: 10px;
+
+    font-size: 13px;
+}
+
+.stock.disponible {
+    color: #00ff88;
+}
+
+.stock.agotado {
+    color: #ff3355;
+}
+
+
+/* ================= ADMIN ================= */
+
+.admin-section {
+
+    background:
+        linear-gradient(
+            rgba(255, 0, 255, .03),
+            rgba(0, 255, 255, .03)
+        );
+}
+
+.form-container {
+
+    max-width: 1000px;
+
+    margin: auto;
+
+    padding: 30px;
+
+    background: #0b0b18;
+
+    border: 1px solid #27273d;
+
+    border-radius: 12px;
+}
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+.input-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.input-group.full {
+    grid-column: 1 / -1;
+}
+
+.input-group label {
+
+    color: #00ffff;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.input-group input,
+.input-group select {
+
+    padding: 13px;
+
+    background: #050510;
+
+    color: white;
+
+    border: 1px solid #33334d;
+
+    border-radius: 5px;
+
+    outline: none;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+
+    border-color: #ff00ff;
+
+    box-shadow:
+        0 0 10px rgba(255, 0, 255, .3);
+}
+
+.price-input {
+
+    display: flex;
+
+    align-items: center;
+
+    background: #050510;
+
+    border: 1px solid #33334d;
+
+    border-radius: 5px;
+}
+
+.price-input span {
+
+    padding-left: 12px;
+
+    color: #00ff88;
+
+    font-weight: bold;
+}
+
+.price-input input {
+
+    width: 100%;
+
+    border: none;
+}
+
+.form-buttons {
+
+    display: flex;
+
+    gap: 15px;
+
+    margin-top: 25px;
+}
+
+.btn-cancelar {
+
+    padding: 14px 25px;
+
+    background: transparent;
+
+    color: #ff5577;
+
+    border: 1px solid #ff5577;
+
+    cursor: pointer;
+
+    border-radius: 4px;
+}
+
+.btn-cancelar:hover {
+
+    background: #ff5577;
+
+    color: white;
+}
+
+
+/* ================= TABLA ================= */
+
+.table-container {
+
+    overflow-x: auto;
+
+    margin-top: 40px;
+}
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 950px;
+
+    background: #0b0b18;
+}
+
+th {
+
+    padding: 15px;
+
+    text-align: left;
+
+    color: #00ffff;
+
+    background: #101020;
+
+    font-family: "Orbitron";
+
+    font-size: 12px;
+}
+
+td {
+
+    padding: 12px;
+
+    border-bottom: 1px solid #222238;
+
+    font-size: 13px;
+}
+
+.tabla-img {
+
+    width: 60px;
+    height: 60px;
+
+    object-fit: cover;
+
+    border-radius: 5px;
+}
+
+.btn-editar,
+.btn-eliminar {
+
+    border: none;
+
+    padding: 8px 12px;
+
+    cursor: pointer;
+
+    border-radius: 4px;
+
+    margin: 2px;
+}
+
+.btn-editar {
+
+    background: #00ffff;
+
+    color: #050510;
+}
+
+.btn-eliminar {
+
+    background: #ff3366;
+
+    color: white;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+
+    padding: 45px;
+
+    text-align: center;
+
+    border-top: 1px solid #24243a;
+
+    background: #030308;
+}
+
+.footer-logo {
+
+    font-family: "Orbitron";
+
+    color: #00ffff;
+
+    font-size: 22px;
+
+    margin-bottom: 10px;
+}
+
+footer p {
+
+    color: #777;
+
+    font-size: 13px;
+}
+
+.footer-neon {
+
+    color: #ff00ff !important;
+
+    margin-top: 10px;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width: 800px) {
+
+    .header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-shoe {
+        width: 280px;
+        height: 280px;
+    }
+
+    .hero-shoe span {
+        font-size: 150px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .input-group.full {
+        grid-column: auto;
+    }
+
+    .filters {
+        flex-direction: column;
+    }
+
+    .filters input,
+    .filters select {
+        width: 100%;
+    }
+
+}

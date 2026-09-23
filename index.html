@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEON KICKS | Zapatería</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div class="logo">
+            <span class="logo-icon">👟</span>
+            <div>
+                <h1>NEON KICKS</h1>
+                <p>Urban Shoes</p>
+            </div>
+        </div>
+
+        <nav class="nav">
+            <a href="#inicio">Inicio</a>
+            <a href="#productos">Productos</a>
+            <a href="#administrar">Administrar</a>
+        </nav>
+
+    </header>
+
+
+    <!-- ================= INICIO ================= -->
+
+    <section id="inicio" class="hero">
+
+        <div class="hero-content">
+
+            <div class="hero-text">
+
+                <p class="tag">⚡ TU ESTILO. TU PASO. TU MARCA.</p>
+
+                <h2>
+                    CAMINA CON<br>
+                    <span>ACTITUD</span>
+                </h2>
+
+                <p>
+                    Descubre nuestra colección de zapatos urbanos,
+                    deportivos y casuales.
+                </p>
+
+                <a href="#productos" class="btn-neon">
+                    VER PRODUCTOS
+                </a>
+
+            </div>
+
+            <div class="hero-shoe">
+                <div class="glow"></div>
+                <span>👟</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ESTADÍSTICAS ================= -->
+
+    <section class="stats">
+
+        <div class="stat-card">
+            <span>👟</span>
+            <strong id="totalProductos">0</strong>
+            <p>Productos</p>
+        </div>
+
+        <div class="stat-card">
+            <span>📦</span>
+            <strong id="totalStock">0</strong>
+            <p>Unidades disponibles</p>
+        </div>
+
+        <div class="stat-card">
+            <span>💰</span>
+            <strong>Q</strong>
+            <p>Precios en Quetzales</p>
+        </div>
+
+    </section>
+
+
+    <!-- ================= PRODUCTOS ================= -->
+
+    <section id="productos" class="section">
+
+        <div class="section-title">
+
+            <p class="tag">NUESTRA COLECCIÓN</p>
+
+            <h2>
+                PRODUCTOS <span>DESTACADOS</span>
+            </h2>
+
+        </div>
+
+
+        <div class="filters">
+
+            <input
+                type="text"
+                id="buscar"
+                placeholder="🔎 Buscar zapatos..."
+            >
+
+            <select id="filtroMarca">
+                <option value="todas">Todas las marcas</option>
+                <option value="Nike">Nike</option>
+                <option value="Adidas">Adidas</option>
+                <option value="Puma">Puma</option>
+                <option value="New Balance">New Balance</option>
+                <option value="Vans">Vans</option>
+                <option value="Converse">Converse</option>
+            </select>
+
+        </div>
+
+
+        <div id="productosContainer" class="productos-grid"></div>
+
+    </section>
+
+
+    <!-- ================= ADMINISTRACIÓN ================= -->
+
+    <section id="administrar" class="section admin-section">
+
+        <div class="section-title">
+
+            <p class="tag">GESTIÓN DE INVENTARIO</p>
+
+            <h2>
+                ADMINISTRAR <span>PRODUCTOS</span>
+            </h2>
+
+        </div>
+
+
+        <!-- FORMULARIO -->
+
+        <div class="form-container">
+
+            <form id="productoForm">
+
+                <input type="hidden" id="productoId">
+
+                <div class="form-grid">
+
+                    <div class="input-group">
+                        <label>Nombre del zapato</label>
+                        <input
+                            type="text"
+                            id="nombre"
+                            placeholder="Ej. Air Max 90"
+                            required
+                        >
+                    </div>
+
+                    <div class="input-group">
+                        <label>Marca</label>
+
+                        <select id="marca" required>
+                            <option value="">Seleccionar</option>
+                            <option value="Nike">Nike</option>
+                            <option value="Adidas">Adidas</option>
+                            <option value="Puma">Puma</option>
+                            <option value="New Balance">New Balance</option>
+                            <option value="Vans">Vans</option>
+                            <option value="Converse">Converse</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Talla</label>
+
+                        <select id="talla" required>
+                            <option value="">Seleccionar</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                            <option value="37">37</option>
+                            <option value="38">38</option>
+                            <option value="39">39</option>
+                            <option value="40">40</option>
+                            <option value="41">41</option>
+                            <option value="42">42</option>
+                            <option value="43">43</option>
+                            <option value="44">44</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Color</label>
+                        <input
+                            type="text"
+                            id="color"
+                            placeholder="Ej. Negro"
+                            required
+                        >
+                    </div>
+
+                    <div class="input-group">
+                        <label>Precio en Quetzales</label>
+
+                        <div class="price-input">
+                            <span>Q</span>
+
+                            <input
+                                type="number"
+                                id="precio"
+                                min="0"
+                                step="0.01"
+                                placeholder="599.00"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+                    <div class="input-group">
+                        <label>Cantidad disponible</label>
+
+                        <input
+                            type="number"
+                            id="cantidad"
+                            min="0"
+                            placeholder="10"
+                            required
+                        >
+                    </div>
+
+                    <div class="input-group full">
+                        <label>URL de imagen</label>
+
+                        <input
+                            type="url"
+                            id="imagen"
+                            placeholder="https://..."
+                            required
+                        >
+                    </div>
+
+                </div>
+
+
+                <div class="form-buttons">
+
+                    <button
+                        type="submit"
+                        class="btn-neon"
+                        id="btnGuardar"
+                    >
+                        ➕ AGREGAR PRODUCTO
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn-cancelar"
+                        id="btnCancelar"
+                    >
+                        CANCELAR
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- TABLA -->
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Producto</th>
+                        <th>Marca</th>
+                        <th>Talla</th>
+                        <th>Color</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Acciones</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaProductos"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-logo">
+            👟 NEON KICKS
+        </div>
+
+        <p>
+            © 2026 NEON KICKS — Todos los derechos reservados
+        </p>
+
+        <p class="footer-neon">
+            HECHO CON ⚡ Y ESTILO
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
